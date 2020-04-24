@@ -1,0 +1,17 @@
+<HTML>
+<HEAD>
+  <TITLE>Add Inspection Record</TITLE>
+</HEAD>
+<BODY>
+      Logged in as: {{ request.user.get_full_name  }}
+      <BR>
+      <A HREF="/logout/">Logout</A>
+      <HR>
+  <H1>Add Inspection Record for {{ firearm }} (S/N:{{ firearm.serial }})</H1>
+  <FORM action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <INPUT type="submit" value="Add">
+  </FORM>
+</BODY>
+</HTML>

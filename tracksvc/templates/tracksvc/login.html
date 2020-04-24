@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+  <TITLE>Login</TITLE>
+</HEAD>
+<BODY>
+  <H3>Login to the TrackSvc App</H3>
+  <FORM action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <INPUT type="hidden" name="next" value="/tracksvc/">
+    {{ form }}
+    <INPUT type="submit" value="Login">
+  </FORM>
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+  <TITLE>Firearms List</TITLE>
+  <STYLE>
+  table, th, td { border: 1px solid black }
+  </STYLE>
+</HEAD>
+<BODY>
+      Logged in as: {{ request.user.get_full_name  }}
+      <BR>
+      <A HREF="/logout/">Logout</A>
+      <HR>
+  <H1>Currently Maintained Firearms</H1>
+  <TABLE style="width:100%">
+    <THEAD>
+      <TR>
+        <TH>ID</TH>
+        <TH>Make</TH>
+        <TH>Model</TH>
+        <TH>Serial Number</TH>
+      </TR>
+    </THEAD>
+    <TBODY>
+    {% for firearm in firearms_list %}
+      <TR>
+          <TD>{{ firearm.id }}</TD>
+          <TD>{{ firearm.make }}</TD>
+          <TD>{{ firearm.model }}</TD>
+          <TD>
+            <A HREF="{% url 'fdetail' firearm.id %}">
+              {{ firearm.serial }}
+            </A>
+          </TD>
+      </TR>
+    {% endfor %}
+    </TBODY>
+  </TABLE>
+  <SMALL>Click on a serial number to view records for the firearm.</SMALL>
+</BODY>
+</HTML>
