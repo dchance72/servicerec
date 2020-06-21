@@ -14,23 +14,23 @@
   <TABLE style="width:100%">
     <THEAD>
       <TR>
-        <TH>ID</TH>
+        <TH>Serial Number</TH>
         <TH>Make</TH>
         <TH>Model</TH>
-        <TH>Serial Number</TH>
+        <TH>Location</TH>
       </TR>
     </THEAD>
     <TBODY>
     {% for firearm in firearms_list %}
       <TR>
-          <TD>{{ firearm.id }}</TD>
-          <TD>{{ firearm.make }}</TD>
-          <TD>{{ firearm.model }}</TD>
           <TD>
             <A HREF="{% url 'fdetail' firearm.id %}">
               {{ firearm.serial }}
             </A>
           </TD>
+          <TD>{{ firearm.make }}</TD>
+          <TD>{{ firearm.model }}</TD>
+          <TD>{{ firearm.location }}</TD>
       </TR>
     {% endfor %}
     </TBODY>

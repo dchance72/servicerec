@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+import datetime
 # Create your models here.
 
 """
@@ -18,16 +18,18 @@ class User(models.Model):
     def __str__(self):
         return self.name
 """
+
+
 class Firearm(models.Model):
     make = models.CharField(max_length=32)
     model = models.CharField(max_length=32)
     serial = models.CharField(max_length=32)
+    location = models.CharField(max_length=64, default=None, null=True)
     def __str__(self):
         return self.make + ' ' + self.model
     class Meta:
         ordering = ['make']
 
-import datetime
 
 class CheckEvent(models.Model):
     STATE_CODES = (
