@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Create your views here.
 from .models import Firearm,CheckEvent
-from .forms import CheckForm
+from .forms import CheckForm, FirearmForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -47,3 +47,17 @@ def get_check_data(request, firearm_id):
         f = Firearm.objects.get(pk=firearm_id)
     return render( request, 'tracksvc/addcheck.html', {'form': form, 'firearm': f})
 
+def add_firearm(request):
+    if request.method == 'POST':
+        form = FirearmForm(request.POST)
+        if form.is_valid():
+            f = Firearm()
+            f.make = form.cleaned_data['make']
+            f.model = form.cleaned_data['model']
+            f.serial = form.cleaned_data['serial']
+            f.location = form.cleaned_data['location']
+            f.save()
+            return HttpResponseRedirect(reverse('index', args=()))
+    else:
+        form = FirearmForm()
+    return render(request, 'tracksvc/addfirearm.html', {'form': form})

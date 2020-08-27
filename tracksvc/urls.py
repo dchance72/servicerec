@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', views.default, name='default'),
     path('tracksvc/', views.index, name='index'),
+    path('tracksvc/add_firearm/', views.add_firearm, name='add_firearm'),
     path('<int:firearm_id>/', views.fdetail, name='fdetail'),
     path('<int:firearm_id>/add/', views.get_check_data, name='get_check_data'),
 ]
