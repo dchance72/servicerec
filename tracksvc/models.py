@@ -25,8 +25,10 @@ class Firearm(models.Model):
     model = models.CharField(max_length=32)
     serial = models.CharField(max_length=32)
     location = models.CharField(max_length=64, default=None, null=True)
+
     def __str__(self):
         return self.make + ' ' + self.model
+
     class Meta:
         ordering = ['make']
 
@@ -46,8 +48,10 @@ class CheckEvent(models.Model):
     firearm = models.ForeignKey(Firearm, on_delete=models.CASCADE)
     notes = models.CharField(max_length=200,blank=True)
     state = models.IntegerField(choices=STATE_CODES, default=0)
+
     def __str__(self):
         return self.firearm.serial + '(' + str(self.when) + ')'
+
     class Meta:
         ordering = ['when']
 

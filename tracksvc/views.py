@@ -11,14 +11,17 @@ from django.shortcuts import redirect
 
 settings.LOGIN_URL='/login/'
 
+
 def default(request):
     return redirect('/login/')
+
 
 @login_required
 def index(request):
     firearms_list = Firearm.objects.order_by('id')
     context = {'firearms_list': firearms_list}
     return render(request, 'tracksvc/index.html', context)
+
 
 @login_required
 def fdetail(request, firearm_id):
@@ -28,6 +31,7 @@ def fdetail(request, firearm_id):
     'firearm': firearm,
     }
     return render(request, 'tracksvc/fdetail.html', context)
+
 
 @login_required
 def get_check_data(request, firearm_id):
@@ -46,6 +50,7 @@ def get_check_data(request, firearm_id):
         form = CheckForm(initial={'user': request.user})
         f = Firearm.objects.get(pk=firearm_id)
     return render( request, 'tracksvc/addcheck.html', {'form': form, 'firearm': f})
+
 
 def add_firearm(request):
     if request.method == 'POST':
