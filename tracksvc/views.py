@@ -27,9 +27,7 @@ def index(request):
 def fdetail(request, firearm_id):
     firearm = Firearm.objects.get(pk=firearm_id)
     check_event_list = CheckEvent.objects.filter(firearm=firearm_id)
-    context = {'check_event_list': check_event_list,
-    'firearm': firearm,
-    }
+    context = {'check_event_list': check_event_list, 'firearm': firearm, }
     return render(request, 'tracksvc/fdetail.html', context)
 
 
@@ -45,11 +43,11 @@ def get_check_data(request, firearm_id):
             ce.notes = form.cleaned_data['notes']
             ce.firearm = Firearm.objects.get(pk=firearm_id)
             ce.save()
-            return HttpResponseRedirect(reverse('fdetail', args=(firearm_id,)))
+        return HttpResponseRedirect(reverse('fdetail', args=(firearm_id,)))
     else:
         form = CheckForm(initial={'user': request.user})
         f = Firearm.objects.get(pk=firearm_id)
-    return render( request, 'tracksvc/addcheck.html', {'form': form, 'firearm': f})
+        return render(request, 'tracksvc/addcheck.html', {'form': form, 'firearm': f})
 
 
 def add_firearm(request):
@@ -62,7 +60,7 @@ def add_firearm(request):
             f.serial = form.cleaned_data['serial']
             f.location = form.cleaned_data['location']
             f.save()
-            return HttpResponseRedirect(reverse('index', args=()))
+        return HttpResponseRedirect(reverse('index', args=()))
     else:
         form = FirearmForm()
-    return render(request, 'tracksvc/addfirearm.html', {'form': form})
+        return render(request, 'tracksvc/addfirearm.html', {'form': form})
